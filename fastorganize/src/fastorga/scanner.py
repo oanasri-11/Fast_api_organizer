@@ -1,6 +1,7 @@
 #Find Files && Folders 
 from pathlib import Path
-p=Path('C:/Users/HP/Desktop/Siraj')
-files=p.rglob('*.py*')
-for f in files:
-  print(f)
+
+def scan_project(project_path:str):
+  project=Path(project_path)
+  py_files=list(project.rglob("*.py"))
+  return py_files
