@@ -10,11 +10,13 @@ class MovePlan:
     source: Path
     destination: Path
     reason: str
+    affected_files: list[Path]
 
 
 def create_plan(
     results: list[FileAnalysis],
-    project_root: Path
+    app_directory: Path,
+    reverse_dependencies: dict[Path, list[Path]]
 ):
     plan = []
 
@@ -24,36 +26,74 @@ def create_plan(
 
         source = Path(file.path)
 
+        destination = None
+
         if file_type == "route":
-            destination = project_root / "app" / "routes" / source.name
+            destination = (
+                app_directory
+                / "routes"
+                / source.name
+            )
 
         elif file_type == "schema":
-            destination = project_root / "app" / "schemas" / source.name
+            destination = (
+                app_directory
+                / "schemas"
+                / source.name
+            )
 
         elif file_type == "model":
-            destination = project_root / "app" / "models" / source.name
+            destination = (
+                app_directory
+                / "models"
+                / source.name
+            )
 
         elif file_type == "service":
-            destination = project_root / "app" / "services" / source.name
+            destination = (
+                app_directory
+                / "services"
+                / source.name
+            )
 
         elif file_type == "database":
-            destination = project_root / "app" / "database" / source.name
+            destination = (
+                app_directory
+                / "database"
+                / source.name
+            )
 
         elif file_type == "config":
-            destination = project_root / "app" / "config" / source.name
+            destination = (
+                app_directory
+                / "config"
+                / source.name
+            )
 
         elif file_type == "utility":
-            destination = project_root / "app" / "utils" / source.name
+            destination = (
+                app_directory
+                / "utils"
+                / source.name
+            )
 
-        else:
+        # Unknown files are not moved
+        if destination is None:
             continue
 
+        affected_files = reverse_dependencies.get(
+            source,
+            []
+        )
+
         if source != destination:
+
             plan.append(
                 MovePlan(
                     source=source,
                     destination=destination,
-                    reason=f"Detected as {file_type}"
+                    reason=f"Detected as {file_type}",
+                    affected_files=affected_files
                 )
             )
 
