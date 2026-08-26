@@ -308,26 +308,26 @@ The `apply` command asks for confirmation before making changes.
 
 ---
 
-# 🚧 Project Status
+#  Project Status
 
 FastOrganize is currently under active development.
 
 ### Completed
 
-* [x] Project scanning
-* [x] AST analysis
-* [x] Route detection
-* [x] Schema detection
-* [x] Model detection
-* [x] Dependency resolution
-* [x] Dependency graph
-* [x] Organization planning
-* [x] Import rewriting
-* [x] Backup system
-* [x] Rollback system
-* [x] Syntax validation
-* [x] Import validation
-* [x] CLI
+*  Project scanning
+*  AST analysis
+*  Route detection
+*  Schema detection
+*  Model detection
+*  Dependency resolution
+*  Dependency graph
+*  Organization planning
+*  Import rewriting
+*  Backup system
+*  Rollback system
+*  Syntax validation
+*  Import validation
+*  CLI
 
 ### In Progress
 
