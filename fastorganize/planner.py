@@ -11,6 +11,7 @@ class MovePlan:
     destination: Path
     reason: str
     affected_files: list[Path]
+    conflcit:bool
 
 
 def create_plan(
@@ -87,6 +88,7 @@ def create_plan(
         )
 
         if source != destination:
+            conflict=destination.exists()
 
             plan.append(
                 MovePlan(

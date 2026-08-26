@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from .planner import MovePlan
 
 
@@ -7,7 +5,17 @@ def execute_plan(
     plan: list[MovePlan],
     dry_run: bool = True
 ):
+
     for move in plan:
+
+        if move.conflict:
+            print(
+                f"SKIPPING: {move.source}"
+                f" → {move.destination}"
+            )
+            print("Reason: destination already exists")
+            print()
+            continue
 
         print(f"MOVE:")
         print(f"  FROM: {move.source}")
@@ -23,4 +31,6 @@ def execute_plan(
             exist_ok=True
         )
 
-        move.source.rename(move.destination)
+        move.source.rename(
+            move.destination
+        )
