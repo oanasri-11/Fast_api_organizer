@@ -1,7 +1,5 @@
 from fastorganize.scanner import scan_project
 from fastorganize.analyzer import analyze_file
-from pathlib import Path
-import ast 
 
 
 def analyze_project(project_path):
@@ -10,3 +8,4 @@ def analyze_project(project_path):
    for file in files:
       result=analyze_file(file)
       results.append(result)
+   return results
