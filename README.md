@@ -26,3 +26,41 @@ app/user.py
 
 Reason:
 Detected SQLAlchemy model
+# WorkFlow:
+                   PROJECT
+                    │
+                    ↓
+                 Scanner
+                    │
+                    ↓
+                AST Analyzer
+                    │
+                    ↓
+              FileAnalysis
+                 /      \
+                ↓        ↓
+          Classifier   Imports
+              │           │
+              ↓           ↓
+          File Role    Resolver
+              │           │
+              └─────┬─────┘
+                    ↓
+             Dependency Graph
+                    │
+                    ↓
+          Reverse Dependencies
+                    │
+                    ↓
+                 Planner
+                    │
+                    ↓
+                MovePlan
+                    │
+             ┌──────┴──────┐
+             ↓             ↓
+        Import Rewriter  Executor
+             │             │
+             └──────┬──────┘
+                    ↓
+              Organized Project
