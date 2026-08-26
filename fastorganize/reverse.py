@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def reverse_dependencies(
+def build_reverse_dependencies(
     graph: dict[Path, list[Path]]
 ) :
     reversed_graph = {}

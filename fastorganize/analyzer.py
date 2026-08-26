@@ -85,8 +85,20 @@ def extract_route(decorator, function_name):
 
 def analyze_file(file_path):
 
-    code = file_path.read_text()
-    tree = ast.parse(code)
+    try:
+        code = file_path.read_text(
+            encoding="utf-8"
+        )
+
+        tree = ast.parse(code)
+
+    except (SyntaxError, UnicodeDecodeError) as error:
+
+        print(
+            f"Error parsing {file_path}: {error}"
+        )
+
+        return None
 
     functions = []
     imports = []
@@ -103,7 +115,10 @@ def analyze_file(file_path):
         # Functions + FastAPI routes
         # -------------------------
 
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        if isinstance(
+            node,
+            (ast.FunctionDef, ast.AsyncFunctionDef)
+        ):
 
             functions.append(node.name)
 
@@ -178,15 +193,3 @@ def analyze_file(file_path):
         routes=routes,
         file_type=file_type
     )
-  
-      
-   
-
- 
-
-         
-     
-
-
-
-  

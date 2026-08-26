@@ -7,11 +7,12 @@ from .classifier import classify_file
 
 @dataclass
 class MovePlan:
+
     source: Path
     destination: Path
     reason: str
     affected_files: list[Path]
-    conflcit:bool
+    conflict: bool
 
 
 def create_plan(
@@ -95,7 +96,8 @@ def create_plan(
                     source=source,
                     destination=destination,
                     reason=f"Detected as {file_type}",
-                    affected_files=affected_files
+                    affected_files=affected_files,
+                    conflict=conflict
                 )
             )
 
