@@ -75,3 +75,19 @@ Validation
 CLI
 Tests
 Packaging
+
+
+
+# Note 2:
+
+
+Project
+   ↓
+Create backup
+   ↓
+Apply changes
+   ↓
+Validation
+   ↓
+PASS ──→ Keep changes
+FAIL ──→ Restore backup
