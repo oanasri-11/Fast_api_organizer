@@ -64,3 +64,14 @@ Detected SQLAlchemy model
              └──────┬──────┘
                     ↓
               Organized Project
+  # Notes For Me :
+  Application root detection    ← next
+Collision detection
+Better classification
+Plan/report integration
+Import rewriting integration
+Safe executor
+Validation
+CLI
+Tests
+Packaging
