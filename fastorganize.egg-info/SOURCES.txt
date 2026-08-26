@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+fastorganize/__init__.py
+fastorganize/analyzer.py
+fastorganize/cli.py
+fastorganize/scanner.py
+fastorganize.egg-info/PKG-INFO
+fastorganize.egg-info/SOURCES.txt
+fastorganize.egg-info/dependency_links.txt
+fastorganize.egg-info/top_level.txt
+tests/test_analyzer.py
+tests/test_scanner.py

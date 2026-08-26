@@ -1,0 +1,22 @@
+Metadata-Version: 2.4
+Name: fastorganize
+Version: 0.1.0
+Summary: Simple project scanner and analyzer utilities.
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+# Fast_api_organizer
+
+## Setup
+
+Install the package in editable mode from the project root:
+
+```bash
+python -m pip install -e .
+```
+
+Then imports like this will work:
+
+```python
+from fastorganize.scanner import scan_project
+```
