@@ -1,362 +1,87 @@
+
+
+
 # FastOrganize
 
-FastOrganize is a Python CLI tool that analyzes and automatically organizes FastAPI projects.
+> An AST-powered CLI for safely organizing FastAPI projects.
 
-It uses Python's **AST (Abstract Syntax Tree)** to understand Python files, detect their roles, analyze dependencies, generate a safe organization plan, move files, rewrite imports, and validate the result.
+FastOrganize analyzes a FastAPI project, detects the role of Python files,
+analyzes dependencies, creates an organization plan, and safely applies
+the required changes.
 
----
+## ✨ Features
 
-##  Features
+- 🔍 FastAPI project scanning
+- 🧠 AST-based Python analysis
+- 📂 Automatic file classification
+- 🔗 Dependency graph analysis
+- 📋 Organization planning
+- 🔄 Import rewriting
+- 🛡️ Safe file execution
+- ✅ Validation
+- ↩️ Rollback support
+- 💻 Command-line interface
+- 📦 Python package distribution
 
-*  Scan Python/FastAPI projects
-*  Analyze Python code using AST
-*  Detect FastAPI routes
-*  Detect Pydantic schemas
-*  Detect SQLAlchemy models
-*  Build dependency relationships
-*  Generate an organization plan
-*  Organize files into logical directories
-*  Rewrite imports after moving files
-*  Create backups before modifications
-*  Roll back changes if validation fails
-*  Validate Python syntax
-*  Validate internal imports
-*  CLI interface
-
----
-
-#  Architecture
+## 🏗️ Architecture
 
 ```text
-                         FastOrganize
-                              │
-                              ▼
-                         CLI (Typer)
-                              │
-                              ▼
-                         Pipeline
-                              │
-              ┌───────────────┴───────────────┐
-              │                               │
-              ▼                               ▼
-           Scanner                         Analyzer
-              │                               │
-              │                         Python AST
-              │                               │
-              └───────────────┬───────────────┘
-                              ▼
-                         Classifier
-                              │
-                 ┌────────────┼────────────┐
-                 ▼            ▼            ▼
-               Route        Schema       Model
-                 │            │            │
-                 └────────────┼────────────┘
-                              ▼
-                           Resolver
-                              │
-                              ▼
-                       Dependency Graph
-                              │
-                              ▼
-                    Reverse Dependencies
-                              │
-                              ▼
-                           Planner
-                              │
-                              ▼
-                          MovePlan
-                              │
-                              ▼
-                          Executor
-                              │
-                 ┌────────────┼────────────┐
-                 ▼            ▼            ▼
-              Backup         Move       Rewriter
-                                             │
-                                             ▼
-                                      Import Updates
-                                             │
-                                             ▼
-                                          Validator
-                                             │
-                              ┌──────────────┴──────────────┐
-                              ▼                             ▼
-                         Syntax Check                 Import Check
-                              │                             │
-                              └──────────────┬──────────────┘
-                                             ▼
-                                      Success / Rollback
+                    FastOrganize
+                         │
+                         ▼
+                    Project Scanner
+                         │
+                         ▼
+                    AST Analyzer
+                         │
+                         ▼
+                    File Classifier
+                         │
+                         ▼
+                  Dependency Resolver
+                         │
+                         ▼
+                  Organization Planner
+                         │
+                         ▼
+                       Executor
+                         │
+                         ▼
+                     Validator
+                         │
+                 ┌───────┴───────┐
+                 ▼               ▼
+              Success         Rollback
 ```
+#Project Structure:
+  fastorganize/
+├── analyzer.py
+├── classifier.py
+├── cli.py
+├── executor.py
+├── pipeline.py
+├── planner.py
+├── resolver.py
+├── scanner.py
+├── validator.py
+└── ...
+#Installation :
+git clone <your-repository-url>
+cd Fast_api_organizer
 
----
+pip install .
+Development installation
+pip install -e .
+# Usage :
+  # Analyze a FastAPI project:
+   fastorganize analyze path/to/project
+  # Apply the organization plan:
+   fastorganize apply path/to/project
+  # Check the version :
+   fastorganize version
 
-#  Project Structure
+# How It Works :
+  # FastOrganize uses Python's Abstract Syntax Tree (AST) to inspect source
+files without executing them.
 
-```text
-fastorganize/
-│
-├── fastorganize/
-│   ├── __init__.py
-│   │
-│   ├── cli.py
-│   │
-│   ├── scanner.py
-│   │
-│   ├── analyzer.py
-│   │
-│   ├── classifier.py
-│   │
-│   ├── resolver.py
-│   │
-│   ├── dependency_graph.py
-│   │
-│   ├── planner.py
-│   │
-│   ├── executor.py
-│   │
-│   ├── import_rewriter.py
-│   │
-│   ├── validator.py
-│   │
-│   ├── project_structure.py
-│   │
-│   └── reporter.py
-│
-├── tests/
-│
-├── examples/
-│
-├── README.md
-├── pyproject.toml
-└── .gitignore
-```
-
----
-
-#  How It Works
-
-FastOrganize follows a pipeline:
-
-```text
-1. Scan
-   ↓
-2. Analyze
-   ↓
-3. Classify
-   ↓
-4. Resolve dependencies
-   ↓
-5. Build dependency graph
-   ↓
-6. Generate organization plan
-   ↓
-7. Show plan
-   ↓
-8. Backup project
-   ↓
-9. Move files
-   ↓
-10. Rewrite imports
-   ↓
-11. Validate
-   ↓
-12. Success or rollback
-```
-
----
-
-#  AST Analysis
-
-FastOrganize does not simply look at filenames.
-
-It parses Python source code using:
-
-```python
-import ast
-```
-
-For example:
-
-```python
-class User(BaseModel):
-    name: str
-```
-
-can be detected as a **Pydantic schema**.
-
-And:
-
-```python
-class User(Base):
-    __tablename__ = "users"
-```
-
-can be detected as a **SQLAlchemy model**.
-
-FastAPI routes are detected from decorators such as:
-
-```python
-@app.get("/users")
-def get_users():
-    ...
-```
-
----
-
-#  Organization Example
-
-### Before
-
-```text
-app/
-├── main.py
-├── users.py
-├── user_schema.py
-├── database.py
-├── email_service.py
-└── auth_routes.py
-```
-
-### After
-
-```text
-app/
-├── main.py
-│
-├── routes/
-│   └── auth_routes.py
-│
-├── schemas/
-│   └── user_schema.py
-│
-├── models/
-│   └── users.py
-│
-├── database/
-│   └── database.py
-│
-└── services/
-    └── email_service.py
-```
-
-The tool also updates imports affected by the moves.
-
----
-
-#  Safety
-
-FastOrganize is designed to avoid blindly modifying a project.
-
-Before applying changes:
-
-```text
-Organization Plan
-       ↓
-User Confirmation
-       ↓
-Backup
-       ↓
-Apply Changes
-       ↓
-Validation
-```
-
-If validation fails:
-
-```text
-Validation Failed
-       ↓
-Rollback
-       ↓
-Restore Backup
-```
-
-The original project can therefore be restored if the operation fails.
-
----
-
-#  Usage
-
-Analyze a project:
-
-```bash
-python -m fastorganize.cli analyze "path/to/project"
-```
-
-Apply the organization plan:
-
-```bash
-python -m fastorganize.cli apply "path/to/project"
-```
-
-The `analyze` command does not modify the project.
-
-The `apply` command asks for confirmation before making changes.
-
----
-
-#  Technologies
-
-* Python
-* Python AST
-* Typer
-* pathlib
-* dataclasses
-* pytest
-* Git / GitHub
-
----
-
-#  Project Status
-
-FastOrganize is currently under active development.
-
-### Completed
-
-*  Project scanning
-*  AST analysis
-*  Route detection
-*  Schema detection
-*  Model detection
-*  Dependency resolution
-*  Dependency graph
-*  Organization planning
-*  Import rewriting
-*  Backup system
-*  Rollback system
-*  Syntax validation
-*  Import validation
-*  CLI
-
-### In Progress
-
-* [ ] More classification rules
-* [ ] Advanced import handling
-* [ ] Comprehensive test suite
-* [ ] CLI improvements
-* [ ] Package distribution
-* [ ] GitHub Actions
-* [ ] PyPI release
-
----
-
-#  Goal
-
-The goal of FastOrganize is to make restructuring FastAPI projects safer and easier by combining:
-
-```text
-Static Analysis
-      +
-Dependency Analysis
-      +
-Automated Refactoring
-      +
-Validation
-      +
-Rollback
-```
-
----
-
-
+The analysis pipeline is:
