@@ -85,3 +85,63 @@ pip install -e .
 files without executing them.
 
 The analysis pipeline is:
+ Scan
+ ↓
+Parse AST
+ ↓
+Detect classes/functions/imports/routes
+ ↓
+Classify files
+ ↓
+Build dependency graph
+ ↓
+Create organization plan
+ ↓
+Execute changes
+ ↓
+Validate
+
+# Safety :
+FastOrganize is designed to avoid blindly moving files.
+
+Before changes are applied, the tool creates an organization plan.
+
+The execution stage can then:
+
+Determine affected files
+Move files
+Rewrite imports
+Validate Python files
+Roll back when necessary
+
+# Technologies :
+ Python
+FastAPI
+AST
+Typer
+pathlib
+Git / GitHub
+GitHub Actions
+
+# Project Status :
+ Version: 1.0.0
+
+FastOrganize is currently distributed as a Python package and has been
+tested through TestPyPI.
+
+# Roadmap
+ Project scanner
+ AST analyzer
+ File classifier
+ Dependency resolver
+ Organization planner
+ Executor
+ Validator
+ CLI
+ Python package
+ Version 1.0.0
+ TestPyPI release
+ Automated test suite
+ Production PyPI release
+ More FastAPI project patterns
+ Improved dry-run interface
