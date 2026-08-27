@@ -145,3 +145,6 @@ tested through TestPyPI.
  Production PyPI release
  More FastAPI project patterns
  Improved dry-run interface
+## 🎬 Demo
+
+![FastOrganize Demo](docs/demo.png)
