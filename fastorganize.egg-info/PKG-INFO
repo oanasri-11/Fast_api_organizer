@@ -1,22 +1,102 @@
 Metadata-Version: 2.4
 Name: fastorganize
 Version: 0.1.0
-Summary: Simple project scanner and analyzer utilities.
-Requires-Python: >=3.9
+Summary: AST-powered CLI for safely organizing FastAPI projects
+License: MIT
+Requires-Python: >=3.10
 Description-Content-Type: text/markdown
+Requires-Dist: typer>=0.12.0
 
 # Fast_api_organizer
 
-## Setup
 
-Install the package in editable mode from the project root:
 
-```bash
-python -m pip install -e .
-```
+# Note :
+ FastOrganize Plan
+────────────────────────────
 
-Then imports like this will work:
+MOVE
+app/users.py
+→ app/routes/users.py
 
-```python
-from fastorganize.scanner import scan_project
-```
+Reason:
+Detected FastAPI route
+
+MOVE
+app/user_schema.py
+→ app/schemas/user_schema.py
+
+Reason:
+Detected Pydantic schema
+
+MOVE
+app/user.py
+→ app/models/user.py
+
+Reason:
+Detected SQLAlchemy model
+# WorkFlow:
+                   PROJECT
+                    │
+                    ↓
+                 Scanner
+                    │
+                    ↓
+                AST Analyzer
+                    │
+                    ↓
+              FileAnalysis
+                 /      \
+                ↓        ↓
+          Classifier   Imports
+              │           │
+              ↓           ↓
+          File Role    Resolver
+              │           │
+              └─────┬─────┘
+                    ↓
+             Dependency Graph
+                    │
+                    ↓
+          Reverse Dependencies
+                    │
+                    ↓
+                 Planner
+                    │
+                    ↓
+                MovePlan
+                    │
+             ┌──────┴──────┐
+             ↓             ↓
+        Import Rewriter  Executor
+             │             │
+             └──────┬──────┘
+                    ↓
+              Organized Project
+  # Notes For Me :
+  Application root detection    ← next
+Collision detection
+Better classification
+Plan/report integration
+Import rewriting integration
+Safe executor
+Validation
+CLI
+Tests
+Packaging
+
+
+
+# Note 2:
+
+
+Project
+   ↓
+Create backup
+   ↓
+Apply changes
+   ↓
+Validation
+   ↓
+PASS ──→ Keep changes
+FAIL ──→ Restore backup
