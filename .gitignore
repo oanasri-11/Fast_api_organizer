@@ -1,39 +1,9 @@
-# Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environments
+*.egg-info/
+*.egg
 .venv/
 venv/
 env/
-ENV/
-
-# Distribution / packaging
-build/
-dist/
-*.egg-info/
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Type checking
-.mypy_cache/
-.pyright/
-
-# IDEs
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Environment variables
-.env
-.env.*
-
-# FastOrganize backups
-.fastorganize-backup/
+package_test/
+testpypi_install/git rm -r --cached package_test
