@@ -9,21 +9,21 @@ FastOrganize analyzes a FastAPI project, detects the role of Python files,
 analyzes dependencies, creates an organization plan, and safely applies
 the required changes.
 
-## ✨ Features
+##  Features
 
-- 🔍 FastAPI project scanning
-- 🧠 AST-based Python analysis
-- 📂 Automatic file classification
-- 🔗 Dependency graph analysis
-- 📋 Organization planning
-- 🔄 Import rewriting
-- 🛡️ Safe file execution
-- ✅ Validation
-- ↩️ Rollback support
-- 💻 Command-line interface
-- 📦 Python package distribution
+-  FastAPI project scanning
+-  AST-based Python analysis
+-  Automatic file classification
+-  Dependency graph analysis
+-  Organization planning
+-  Import rewriting
+-  Safe file execution
+-  Validation
+-  Rollback support
+-  Command-line interface
+-  Python package distribution
 
-## 🏗️ Architecture
+##  Architecture
 
 ```text
                     FastOrganize
