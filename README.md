@@ -147,4 +147,7 @@ tested through TestPyPI.
  Improved dry-run interface
 ## 🎬 Demo
 
-![FastOrganize Demo](docs/demo.png)
+![FastOrganize Demo](docs/project1.png)
+![FastOrganize Demo](docs/pr4.png)
+![FastOrganize Demo](docs/pr3.png)
+![FastOrganize Demo](docs/pr2.png)
